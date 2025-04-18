@@ -91,7 +91,8 @@ function index() {
             }
 
             if (step === 2) {
-                return SendOTP()
+                 SendOTP()
+                 return;
             }
 
             if (step === 3) {
@@ -124,6 +125,7 @@ function index() {
                         resetForm()
                         dispatch(login(res?.data))
                         navigate("/scp/dashboard")
+                        
                     }
 
                     if (res?.status === "failed") {
@@ -150,7 +152,7 @@ function index() {
             if (res?.status === "success") {
                 toast.success(res?.message)
                 setLoading(false)
-                return setStep(step + 1)
+                setStep(step + 1)
             }
             if (res?.status === "failed") {
                 toast.error(res?.message)
@@ -560,7 +562,7 @@ function index() {
                                     </div>
                                 }
                                 {
-                                    step === totalSteps && (
+                                    step === 3 && (
 
                                         <div className="row justify-content-center">
                                             <div className="col-lg-12">

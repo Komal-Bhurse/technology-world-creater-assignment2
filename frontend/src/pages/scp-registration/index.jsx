@@ -78,6 +78,7 @@ function index() {
         formData.append('upload_preset', import.meta.env.VITE_upload_preset)
         formData.append('cloud_name', import.meta.env.VITE_cloud_name)
         const resp = await axios.post(import.meta.env.VITE_upload_base_url_api, formData)
+        console.log(resp)
         return resp?.data?.url.split("/")?.slice(4)?.join("/")
     }
 

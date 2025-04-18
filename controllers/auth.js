@@ -60,7 +60,7 @@ const VerifyOTP = async (req, res, next) => {
   try {
     const body = req.body;
     const { mobile, otp } = body;
-
+  
     if (!otp) {
       return res.status(404).json({
         status: "failed",
@@ -95,7 +95,7 @@ const VerifyOTP = async (req, res, next) => {
 
     const differenceInSecond = (currentTime - otpSetTime) / 1000;
 
-    if (differenceInSecond > 60) {
+    if (differenceInSecond > 300) {
       return res.status(404).json({
         status: "failed",
         message: "OTP has expired",
@@ -106,6 +106,8 @@ const VerifyOTP = async (req, res, next) => {
 
     delete req.body.otp;
     req.body.isMoblileVerified = true;
+
+
 
     next();
   } catch (error) {
@@ -118,6 +120,7 @@ const VerifyOTP = async (req, res, next) => {
 const Register = async (req, res) => {
   try {
     const body = req.body;
+
 
     const {
       firstName,
@@ -223,7 +226,7 @@ const Register = async (req, res) => {
 
     return res
       .status(500)
-      .json({ status: "failed", message: error.message, data: "" });
+      .json({ status: "failed", message: error, data: "" });
   }
 };
 

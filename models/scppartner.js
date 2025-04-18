@@ -4,16 +4,16 @@ const scppartnerSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true,
-    },
+      required: false,
+      default: "",    },
     middleName: {
       type: String,
-      required: true,
-    },
+      required: false,
+      default: "",    },
     lastName: {
       type: String,
-      required: true,
-    },
+      required: false,
+      default: "",    },
     mobile: {
       type: String,
       required: true,
@@ -40,19 +40,20 @@ const scppartnerSchema = new mongoose.Schema(
     },
     state:{
         type: String,
-        required: true,
-    },
+        required: false,
+        default: "",    },
     district:{
         type: String,
-        required: true,
-    },
+        required: false,
+        default: "",    },
     pincode:{
         type: String,
-        required: true,
-    },
+        required: false,
+        default: "",    },
     pAddress:{
         type: String,
-        required: true,
+        required: false,
+        default: "",
     },
     landMark:{
         type: String,

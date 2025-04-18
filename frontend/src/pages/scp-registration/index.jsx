@@ -140,7 +140,7 @@ function index() {
                         toast.error(res?.message)
                         setLoading(false)
                     }
-                    return
+                    return setLoading(false)
 
                 } catch (error) {
                     toast.error("Registration Failed Please Try Again");

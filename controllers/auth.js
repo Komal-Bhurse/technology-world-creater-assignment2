@@ -65,8 +65,7 @@ const VerifyOTP = async (req, res, next) => {
       return res.status(404).json({
         status: "failed",
         message: "Please enter your OTP",
-        data: otp,
-        error: "",
+        data: body,
       });
     }
 

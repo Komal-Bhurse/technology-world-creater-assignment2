@@ -93,6 +93,7 @@ function index() {
 
             if (step === 2) {
                  SendOTP()
+            
                  return;
             }
 
@@ -103,21 +104,27 @@ function index() {
                         return toast.error("Please select scp certificate and office photo")
                     }
                     
-                    const res0 =  await UpoadImage(values.scpCertificate)
+                    // const res0 =  await UpoadImage(values.scpCertificate)
     
-                    const res1 =  await UpoadImage(values.officePhoto)
+                    // const res1 =  await UpoadImage(values.officePhoto)
     
-                    if(!res0 || !res1){
-                        return toast.error("Unable to upload images, please try again")
+                    // if(!res0 || !res1){
+                    //     return toast.error("Unable to upload images, please try again")
                         
-                    }
-                    values.scpCertificate = res0
-                    values.officePhoto = res1    
+                    // }
+                    // values.scpCertificate = res0
+                    // values.officePhoto = res1    
 
                     delete values.cPassword
                     delete values.sapa
+
+                    const formData = new FormData()
+                    for (const key in values) {
+                        formData.append(key,values[key])
+                    }
+                
                     setLoading(true);
-                    const response = await APICALL("post", "/api/auth/verify-otp", values)
+                    const response = await APICALL("post", "/api/auth/verify-otp", formData,"formdata")
                     const res = response?.data;
 
                     if (res?.status === "success") {

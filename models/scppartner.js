@@ -66,11 +66,13 @@ const scppartnerSchema = new mongoose.Schema(
     },
     scpCertificate:{
         type: String,
-        required: true,
+        required: false,
+        default:""
     },
     officePhoto:{
         type: String,
-        required: true,
+        required: false,
+        default:""
     },
     isMobileVerified:{
       type:Boolean,

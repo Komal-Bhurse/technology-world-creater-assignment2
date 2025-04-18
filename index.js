@@ -18,10 +18,18 @@ connectDB();
 
 // middlewares
 app.use(helmet());
+// app.use(
+//     helmet({
+//       contentSecurityPolicy: {
+//         directives: {
+//           "script-src": ["'self'", "*"],
+//         },
+//       },
+//     }),
+//   );
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-
 
 // Serve static frontend files
 app.use(express.static(path.resolve("./", 'frontend', 'dist')));

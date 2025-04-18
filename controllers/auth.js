@@ -105,10 +105,8 @@ const VerifyOTP = async (req, res, next) => {
     }
 
     delete req.body.otp;
-    req.body.isMoblileVerified = true;
-
-
-
+    req.body.isMobileVerified = true;
+    
     next();
   } catch (error) {
     return res

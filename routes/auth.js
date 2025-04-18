@@ -26,7 +26,7 @@ const router = express.Router()
 
 router.post('/send-otp', SendOtp)
 
-router.post('/verify-otp',VerifyOTP, uploadSCPPartner.fields([{name:"scpCertificate"},{name:"officePhoto"}]),Register)
+router.post('/verify-otp',uploadSCPPartner.fields([{name:"scpCertificate"},{name:"officePhoto"}]),VerifyOTP,Register)
 
 router.post('/login', Login)
 

@@ -144,11 +144,10 @@ function index() {
         },
     });
 
-    const SendOTP = () => {
+    const SendOTP = async() => {
         try {
             setLoading(true);
-            const response = APICALL("post", "/api/auth/send-otp", { mobile: Formik.values.mobile })
-            console.log(response)
+            const response = await APICALL("post", "/api/auth/send-otp", { mobile: Formik.values.mobile })
             const res = response?.data;
             if (res?.status === "success") {
                 toast.success(res?.message)

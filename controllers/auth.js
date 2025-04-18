@@ -44,7 +44,7 @@ const SendOtp = async (req, res) => {
             status: "success",
             message:
                 "OTP has been sent successfully on your registered mobile number",
-            data: response,
+            data: "",
             error: "",
         });
     } catch (error) {

@@ -126,7 +126,7 @@ function index() {
                     setLoading(true);
                     const response = await APICALL("post", "/api/auth/verify-otp", formData,"formdata")
                     const res = response?.data;
-
+                      console.log(response)
                     if (res?.status === "success") {
                         toast.success(res?.message)
                         setLoading(false)

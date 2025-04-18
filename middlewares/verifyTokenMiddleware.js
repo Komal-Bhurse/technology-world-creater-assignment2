@@ -1,7 +1,7 @@
 import  { validateToken }  from "../services/auth.js";
 
 const  verifyToken = async(req, res, next) =>{
-  const userUid = req.cookies?.twc_uid;
+  const userUid = req.cookies?.twc_uid2;
   if (!userUid) {
     return res.status(404).json({
       status:'failed',

@@ -166,10 +166,10 @@ const Register = async (req, res) => {
 
         const token = generateToken(response);
 
-        res.cookie("twc_uid", token, {
+        res.cookie("twc_uid2", token, {
             secure: true,
             httpOnly:true,
-            domain: "twc-eight.vercel.app",
+            domain: "technology-world-creater-assignment2.vercel.app",
         });
 
         return res.status(201).json({
@@ -211,10 +211,10 @@ const Login = async (req, res) => {
 
         const token = generateToken(user);
 
-        res.cookie("twc_uid", token, {
+        res.cookie("twc_uid2", token, {
             secure: true,
             httpOnly:true,
-            domain: "twc-eight.vercel.app",
+            domain: "technology-world-creater-assignment2.vercel.app",
         });
 
         res.status(200).json({ status: 'success', message:'login successfull',data: user })
@@ -229,7 +229,7 @@ const Login = async (req, res) => {
 
 const Logout = (req, res) => {
     try {
-        res.clearCookie("twc_uid");
+        res.clearCookie("twc_uid2");
 
         return res.status(200).json({ status: 'success', data: '', message: 'logout successfull' })
 

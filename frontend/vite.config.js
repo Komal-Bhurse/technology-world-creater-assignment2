@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://twc-eight.vercel.app/",
+        target: "https://technology-world-creater-assignment2.vercel.app/",
         secure: true,
         changeOrigin: true,
       },

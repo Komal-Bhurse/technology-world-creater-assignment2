@@ -332,6 +332,7 @@ function index() {
     useEffect(()=>{
         if(id){
             getSingalData()
+            setFarmerID(id)
         }
     },[])
 

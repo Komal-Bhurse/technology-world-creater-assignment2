@@ -8,7 +8,7 @@ const Footer = () => {
 				<span>
 					© 2025 TWC. All rights reserved.
 				</span>
-				<span>Powered by <a href="#" target="_blank" rel="noreferrer noopener">Technology Worlds Creator</a></span>
+				<span>Powered by <a href="https://technologyworldcreate.com/" target="_blank" rel="noreferrer noopener">Technology Worlds Creator</a></span>
 			</footer>
 		</>
 	);

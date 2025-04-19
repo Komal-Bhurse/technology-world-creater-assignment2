@@ -132,8 +132,8 @@ function index() {
                         setLoading(false)
                         resetForm()
                         dispatch(login(res?.data))
+                        setStep(1)
                         navigate("/scp/dashboard")
-                        
                     }
 
                     if (res?.status === "failed") {

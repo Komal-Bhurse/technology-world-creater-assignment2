@@ -14,22 +14,22 @@ const Header = ({ toggleSidebar }) => {
 	const Logout = async () => {
 		const loading = toast.loading("Logging Out!");
 		try {
-			const res = await axios.post("/apis/users", { Cmd: "LOGOUT" }, { withCredentials: true });
-
-			if (res.data.status === "success") {
+			const response = await axios.post("/apis/auth/logout", { withCredentials: true });
+             const res = response?.data
+			if (res.status === "success") {
 				persistor.purge();
 				dispatch(logout(null));
 				toast.dismiss(loading);
 				toast.success("Logout Successfull!");
 				navigate("/");
 			}
-			if (res.data.status === "failed") {
+			if (res.status === "failed") {
 				toast.dismiss(loading);
-				toast.error("Please try again!");
+				toast.error(res?.message);
 			}
 		} catch (error) {
 			toast.dismiss(loading);
-			toast.error("Please try again!");
+			toast.error(res.message);
 		}
 	};
 
@@ -67,14 +67,14 @@ const Header = ({ toggleSidebar }) => {
 
 						<span className="fw-bold text-secondary">Announcements</span>
 					</div>
-					<div onClick={() => navigate("/scp/login")} className="border border-2  row " style={{ borderRadius: "10px" }}>
+					<div onClick={() => navigate("/scp/login")} className="border border-2  row dropdown-toggle" style={{ borderRadius: "10px" }} id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" >
 						<div className="col-3">
-							<img style={{ width: "60px", height: "60px" }} src="/images/profile-avtar.png" alt="Avatar" className="rounded-circle dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" />
+							<img style={{ width: "60px", height: "60px" }} src="/images/profile-avtar.png" alt="Avatar" className="rounded-circle " />
 						</div>
 						<div className=" col-9 py-2 d-flex align-items-center justify-content-between">
 							<div>
 								<p className=" m-0 p-0 fw-bold">{user ? user?.firstName + " " + user?.lastName : "Login"}</p>
-								<p className=" m-0 p-0 small text-muted">{user ? `(${user?.distric + "-" + user?.state})` : "Login as SC Partner"}</p>
+								<p className=" m-0 p-0 small text-muted">{user ? `(${user?.district + "-" + user?.state})` : "Login as SC Partner"}</p>
 								{
 									user && <p className=" m-0 p-0 small text-muted">{user && user?.mobile}</p>
 								}
@@ -88,15 +88,27 @@ const Header = ({ toggleSidebar }) => {
 
 					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
 						<li>
-							<Link to="/scp/dashboard" className="dropdown-item">
+							{
+								user && user?.userType === "SCP"
+								?
+								<Link to="/scp/dashboard" className="dropdown-item">
 								Profile
 							</Link>
+							:
+							<Link to="/scp/login" className="dropdown-item">
+								Login
+							</Link>
+							}
+							
 						</li>
+						{
+							user && userType === "SCP" &&
 						<li>
 							<span onClick={Logout} className="dropdown-item">
 								Logout
 							</span>
 						</li>
+						}
 					</ul>
 				</div>
 			</div>

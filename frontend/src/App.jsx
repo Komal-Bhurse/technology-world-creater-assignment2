@@ -10,6 +10,8 @@ import AppTheme from "./themes/apptheme"
 import SCPRegistration from "./pages/scp-registration"
 import SCPLogin from "./pages/scp-login"
 
+import FarmerRegistration from "./pages/farmer-registration"
+
 function App() {
 
   const router = createBrowserRouter([
@@ -28,7 +30,7 @@ function App() {
         },
         {
           path: "/scp/dashboard",
-          element: <SCPRegistration/>
+          element: <FarmerRegistration/>
         }
       ]
     },

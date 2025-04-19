@@ -56,7 +56,6 @@ const addOneUser = async (req, res) => {
       mobile,
       dob,
       gender,
-      farmerPhoto,
     } = data;
 
     if (
@@ -65,8 +64,7 @@ const addOneUser = async (req, res) => {
       !lastName ||
       !mobile ||
       !dob ||
-      !gender ||
-      !farmerPhoto
+      !gender 
     ) {
       return res.status(404).json({
         status: "failed",
@@ -85,15 +83,65 @@ const addOneUser = async (req, res) => {
       });
     }
 
+   const user = await Farmer.findOne({ mobile });
+    
+   if (user) {
+    return res
+      .status(400)
+      .json({ status: "failed", message: "The farmer with given Mobile number is already exists, please use another mobile number ", data: "" });
+  }
+
     const response = await Farmer.create({ ...data });
+
+
+    const farmerUserID = response?._id?.toString();
+    
+        const userDir = path.resolve(`./uploads/${farmerUserID}`);
+        fs.mkdirSync(userDir, { recursive: true });
+    
+        const updatedPaths = {};
+    
+        for (const field of ["farmerPhoto"]) {
+          const file = req.files?.[field]?.[0];
+          if (file) {
+            const oldPath = file.path;
+            const newPath = path.join(userDir, file.filename);
+            fs.renameSync(oldPath, newPath);
+            updatedPaths[`${field}`] = `uploads/${farmerUserID}/${file.filename}`;
+          }
+        }
+
+        const response2 = await Farmer.findByIdAndUpdate(
+              farmerUserID,
+              updatedPaths,
+              {new:true}
+            );
 
     res.status(201).json({
       status: "success",
       message: "farmer added successfull",
-      data: response,
+      data: response2,
     });
+
   } catch (error) {
-    res.status(500).json({ status: "failed", error: "Unabled to add farmer" });
+    const fields = ["farmerPhoto"];
+        fields.forEach((field) => {
+          const file = req.files?.[field]?.[0];
+          if (file && file.path) {
+            fs.unlink(file.path, (unlinkErr) => {
+              if (unlinkErr) {
+                // console.error(
+                //   `Failed to delete temp file: ${file.path}`,
+                //   unlinkErr
+                // );
+              } else {
+                // console.log(`Deleted temp file: ${file.path}`);
+              }
+            });
+          }
+        });
+
+    res.status(500).json({ status: "failed", message: "Unable to add farmer", data: "" });
   }
 };
 
@@ -136,15 +184,63 @@ const updateOneUser = async (req, res) => {
       });
     }
 
-    const response = await Farmer.findByIdAndUpdate(_id, { ...filteredData });
+    const userDir = path.resolve(`./uploads/${_id}`);
+    fs.mkdirSync(userDir, { recursive: true }); // Safe if already exists
+
+    const updatedPaths = {};
+
+    // 2. Check and update file fields
+    const fileFields = ['farmerPhoto'];
+
+    for (const field of fileFields) {
+      const file = req.files?.[field]?.[0];
+
+      if (file) {
+        // 3. Delete old file if exists
+        const oldFilePath = path.resolve(response1[field] || '');
+        if (fs.existsSync(oldFilePath)) {
+          fs.unlinkSync(oldFilePath);
+        }
+
+        // 4. Move new file from temp to user folder
+        const newPath = path.join(userDir, file.filename);
+        fs.renameSync(file.path, newPath);
+
+        updatedPaths[field] = `uploads/${_id}/${file.filename}`;
+      }
+    }
+
+    // 5. Merge form fields with updatedPaths
+    const updatedFarmer = await Farmer.findByIdAndUpdate(
+      _id,
+      { ...filteredData, ...updatedPaths },
+      { new: true }
+    );
 
     res.status(200).json({
       status: "success",
       message: "farmer updated successfully",
-      data: response,
+      data: updatedFarmer,
     });
 
   } catch (error) {
+    const fields = ["farmerPhoto"];
+        fields.forEach((field) => {
+          const file = req.files?.[field]?.[0];
+          if (file && file.path) {
+            fs.unlink(file.path, (unlinkErr) => {
+              if (unlinkErr) {
+                // console.error(
+                //   `Failed to delete temp file: ${file.path}`,
+                //   unlinkErr
+                // );
+              } else {
+                // console.log(`Deleted temp file: ${file.path}`);
+              }
+            });
+          }
+        });
+        
     res
       .status(500)
       .json({ status: "failed", error: "Unabled to update farmer", data: "" });

@@ -10,7 +10,10 @@ import AppTheme from "./themes/apptheme"
 import SCPRegistration from "./pages/scp-registration"
 import SCPLogin from "./pages/scp-login"
 
+import SCPDashboard from './pages/scp-dashboard'
 import FarmerRegistration from "./pages/farmer-registration"
+import Farmers from "./pages/farmers"
+
 
 function App() {
 
@@ -30,6 +33,18 @@ function App() {
         },
         {
           path: "/scp/dashboard",
+          element: <SCPDashboard/>
+        },
+        {
+          path: "/scp/farmers/",
+          element: <Farmers/>
+        },
+        {
+          path: "/scp/farmer-registration/",
+          element: <FarmerRegistration/>
+        },
+        {
+          path: "/scp/farmer-registration/:id",
           element: <FarmerRegistration/>
         }
       ]

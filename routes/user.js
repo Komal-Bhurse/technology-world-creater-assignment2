@@ -3,15 +3,35 @@ import {getAllUsers,getOneUser,addOneUser,updateOneUser,deleteOneUser} from '../
 import  verifyToken  from "../middlewares/verifyTokenMiddleware.js"
 import  authorizedRole  from "../middlewares/roleMiddleware.js"
 
+import multer from 'multer'
+import path from "path"
+import fs from 'fs'
+
+// configure multer  storage
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    const tempPath = path.resolve("./uploads/temp");
+    fs.mkdirSync(tempPath, { recursive: true });
+    return cb(null, tempPath);
+      // return cb(null, path.resolve("./uploads"));
+    },
+    filename: function (req, file, cb) {
+      const fileName = `${Date.now()}-${file.originalname}`;
+      return cb(null, fileName);
+    },
+  });
+  
+  const uploadFarmerPhoto = multer({ storage });
+
 const router = express.Router()
 
 router.get('/getall', verifyToken ,authorizedRole("SCP"),getAllUsers)
 
 router.get('/:id',verifyToken,authorizedRole("SCP"),getOneUser)
 
-router.post('/',verifyToken,authorizedRole("SCP"),addOneUser)
+router.post('/',uploadFarmerPhoto.fields([{name:"farmerPhoto"}]),verifyToken,authorizedRole("SCP"),addOneUser)
 
-router.put('/:id',verifyToken,authorizedRole("SCP"),updateOneUser)
+router.put('/:id',uploadFarmerPhoto.fields([{name:"farmerPhoto"}]),verifyToken,authorizedRole("SCP"),updateOneUser)
 
 router.delete('/:id',verifyToken,authorizedRole("SCP"),deleteOneUser)
 

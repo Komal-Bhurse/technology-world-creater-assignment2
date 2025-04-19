@@ -35,6 +35,8 @@ export default function index() {
 			<div className="app-container">
 				<Header toggleSidebar={toggleSidebar} />
 				<div className="main-layout d-flex">
+				{/* <SCPSidebar isOpen={isOpen} toggleSidebar={toggleSidebar} /> */}
+
 					{
 						user && user?.userType === "SCP" ? (
 							<SCPSidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />

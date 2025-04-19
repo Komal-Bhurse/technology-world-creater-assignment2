@@ -158,7 +158,7 @@ const Register = async (req, res) => {
     if (user) {
       return res
         .status(400)
-        .json({ message: "The Mobile number already exists" });
+        .json({ status: "failed", message: "The Mobile number already exists", data: "" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -224,7 +224,7 @@ const Register = async (req, res) => {
 
     return res
       .status(500)
-      .json({ status: "failed", message: error, data: "" });
+      .json({ status: "failed", message: "Unabled to register", data: "" });
   }
 };
 

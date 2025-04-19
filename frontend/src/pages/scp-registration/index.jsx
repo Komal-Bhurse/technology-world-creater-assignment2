@@ -72,16 +72,6 @@ function index() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const UpoadImage = async(file)=>{
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', import.meta.env.VITE_upload_preset)
-        formData.append('cloud_name', import.meta.env.VITE_cloud_name)
-        const resp = await axios.post(import.meta.env.VITE_upload_base_url_api, formData, {withCredentials:true})
-        console.log(resp)
-        return resp?.data?.url.split("/")?.slice(4)?.join("/")
-    }
-
     const Formik = useFormik({
         initialValues: initialRegisterValues,
         validationSchema: ScpRegisterSchema[step - 1],
@@ -102,18 +92,7 @@ function index() {
 
                     if (!values.scpCertificate || !values.officePhoto) {
                         return toast.error("Please select scp certificate and office photo")
-                    }
-                    
-                    // const res0 =  await UpoadImage(values.scpCertificate)
-    
-                    // const res1 =  await UpoadImage(values.officePhoto)
-    
-                    // if(!res0 || !res1){
-                    //     return toast.error("Unable to upload images, please try again")
-                        
-                    // }
-                    // values.scpCertificate = res0
-                    // values.officePhoto = res1    
+                    }    
 
                     delete values.cPassword
                     delete values.sapa

@@ -34,6 +34,11 @@ const SCPSidebar = ({ isOpen, toggleSidebar }) => {
 						</Link>
 					</li>
 					<li className="nav-item">
+						<Link to="/scp/farmers" onClick={closeSidebar} className={`nav-link ${pathname === "/scp/farmers" ? "bg-light text-success" : "text-white"} ${isOpen ? "row" : ""}`}>
+							<i className="fa fa-users me-2 col-1"></i> <span className="col-11 ">My Farmers</span>
+						</Link>
+					</li>
+					<li className="nav-item">
 						<Link to="/scp/check-enrollment-status" onClick={closeSidebar} className={`nav-link  ${isOpen ? "row" : ""} ${pathname === "/scp/check-enrollment-status" ? "bg-light text-success" : "text-white"}`}>
 							<i className="fa fa-users me-2 col-1 "></i> <span className="col-11 ">Check Enrollment Status</span>
 						</Link>

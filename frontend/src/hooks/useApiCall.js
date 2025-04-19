@@ -11,6 +11,15 @@ export const APICALL = async(method,url,data,dataType)=>{
             return res
         }
         }
+        if(method === "put"){
+            if(dataType === "formdata"){
+                 const res = await axios.put(`${url}`,data,{withCredentials:true})
+                 return res
+             }else{
+             const res = await axios.put(`${url}`,{...data},{withCredentials:true})
+             return res
+         }
+         }
     } catch (error) {
         return error
     }

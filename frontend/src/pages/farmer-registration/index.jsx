@@ -163,7 +163,7 @@ function index() {
                     return toast.error("Please select farmer photo")
                 }
 
-                const updatedFields = getUpdatedFields(initialRegisterValues, values)
+                const updatedFields = getUpdatedFields(initialData, values)
 
                 const formData = new FormData()
                 for (const key in updatedFields) {
@@ -226,9 +226,12 @@ function index() {
 
                 setLoading(true);
 
+                const updatedFields = getUpdatedFields(initialData, values)
+
+
                 const formData = new FormData()
-                for (const key in values) {
-                    formData.append(key, values[key])
+                for (const key in updatedFields) {
+                    formData.append(key, updatedFields[key])
                 }
                 formData.append("step", tab)
                 const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")
@@ -263,9 +266,13 @@ function index() {
 
                 values.whereYouSell = selectedWhereYouSell?.length > 0 ? selectedWhereYouSell?.join(",") : "";
 
+
+                const updatedFields = getUpdatedFields(initialData, values)
+
+
                 const formData = new FormData()
-                for (const key in values) {
-                    formData.append(key, values[key])
+                for (const key in updatedFields) {
+                    formData.append(key, updatedFields[key])
                 }
                 formData.append("step", tab)
                 const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")
@@ -294,9 +301,10 @@ function index() {
                     return toast.error("Please fill the profile deatils first and save it")
                 }
 
+                const updatedFields = getUpdatedFields(initialData, values)
                 const formData = new FormData()
-                for (const key in values) {
-                    formData.append(key, values[key])
+                for (const key in updatedFields) {
+                    formData.append(key, updatedFields[key])
                 }
                 formData.append("step", tab)
                 const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")

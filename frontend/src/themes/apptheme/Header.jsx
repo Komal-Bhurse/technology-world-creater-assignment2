@@ -102,7 +102,7 @@ const Header = ({ toggleSidebar }) => {
 							
 						</li>
 						{
-							user && userType === "SCP" &&
+							user && user?.userType === "SCP" &&
 						<li>
 							<span onClick={Logout} className="dropdown-item">
 								Logout

@@ -1,6 +1,6 @@
 import { Link , useLocation} from "react-router-dom";
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const SCPSidebar = ({ isOpen, toggleSidebar }) => {
 	const {pathname} = useLocation()
 	const width = window.innerWidth;
 
@@ -11,9 +11,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 	};
 	return (
 		<div className="sidebar-container">
-			{/* Sidebar Toggle Button */}
+			{/* SCPSidebar Toggle Button */}
 
-			{/* Sidebar Content */}
+			{/* SCPSidebar Content */}
 			<aside className={`sidebar bg-success text-white shadow-sm ${isOpen ? "open" : "closed p-0"}`}>
 				<ul className="nav flex-column">
 				<li className="nav-item ">
@@ -59,4 +59,4 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 	);
 };
 
-export default Sidebar;
+export default SCPSidebar;

@@ -4,15 +4,11 @@ import { store, persistor } from '@/redux/store'
 import { PersistGate } from 'redux-persist/integration/react';
 import { Toaster } from "react-hot-toast";
 
-import LoginTheme from './themes/login-theme'
-import DashboardTheme from './themes/dashboard-theme'
-
-import HomePage from './pages/home'
-import UserManagementPage from './pages/user-managment'
 import ErrorPage from './pages/404'
 
 import AppTheme from "./themes/apptheme"
 import SCPRegistration from "./pages/scp-registration"
+import SCPLogin from "./pages/scp-login"
 
 function App() {
 
@@ -25,27 +21,14 @@ function App() {
         {
           path: "/",
           element: <SCPRegistration/>
-        }
-      ]
-    },
-
-    {
-      element: <LoginTheme />,
-      errorElement: <ErrorPage />,
-      children: [
+        },
         {
-          path: "/login",
-          element: <HomePage />
-        }
-      ]
-    },
-    {
-      element: <DashboardTheme />,
-      errorElement: <ErrorPage />,
-      children: [
+          path: "/scp/login",
+          element: <SCPLogin/>
+        },
         {
           path: "/scp/dashboard",
-          element: <UserManagementPage />
+          element: <SCPRegistration/>
         }
       ]
     },

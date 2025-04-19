@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.css"; // Include any necessary custom styles
-import Sidebar from "./Sidebar";
+import SCPSidebar from "./SCPSidebar";
+import WebSidebar from "./WebSidebar";
 import Header from "./Header";
 import Footer from "./Footer";
 
-import { Outlet } from "react-router-dom";
+import { Outlet,useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function index() {
 	const { user } = useSelector((state) => state.user);
+
+	const {pathname} = useLocation();
 
 	const [isOpen, setIsOpen] = useState(true);
 
@@ -16,22 +19,30 @@ export default function index() {
 		setIsOpen(!isOpen);
 	};
 
-	// useEffect(() => {
-	// 	if (!user) {
-	// 		window.location.href = "/";
-	// 	}
+	useEffect(() => {
+		if (pathname === "/" && user && user?.UserType === "SCP") {
+			window.location.href = "/scp/dashboard";
+		}
 
-	// 	if (user && user?.UserType !== "Admin") {
-	// 		window.location.href = "/";
-	// 	}
-	// }, []);
+		if (pathname === "/scp/dashboard" && !user && user?.UserType !== "SCP") {
+			window.location.href = "/";
+		}
+
+	}, [user]);
 
 	return (
 		<>
 			<div className="app-container">
 				<Header toggleSidebar={toggleSidebar} />
 				<div className="main-layout d-flex">
-					<Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+					{
+						user && user?.UserType === "SCP" ? (
+							<SCPSidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+						)
+						:(
+							<WebSidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+						)
+					}
 					<div className="content flex-grow-1 p-3" style={{ overflowX: "hidden" }}>
 						<Outlet />
 						<footer className="footer-filler invisible px-4"></footer>

@@ -67,17 +67,20 @@ const Header = ({ toggleSidebar }) => {
 
 						<span className="fw-bold text-secondary">Announcements</span>
 					</div>
-					<div className="border border-2  row " style={{borderRadius:"10px"}}>
+					<div onClick={() => navigate("/scp/login")} className="border border-2  row " style={{ borderRadius: "10px" }}>
 						<div className="col-3">
 							<img style={{ width: "60px", height: "60px" }} src="/images/profile-avtar.png" alt="Avatar" className="rounded-circle dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" />
 						</div>
 						<div className=" col-9 py-2 d-flex align-items-center justify-content-between">
 							<div>
-                               <p className=" m-0 p-0 fw-bold">Login</p>
-							   <p className=" m-0 p-0 small text-muted">Login as SC Partner</p>
+								<p className=" m-0 p-0 fw-bold">{user ? user?.firstName + " " + user?.lastName : "Login"}</p>
+								<p className=" m-0 p-0 small text-muted">{user ? `(${user?.distric + "-" + user?.state})` : "Login as SC Partner"}</p>
+								{
+									user && <p className=" m-0 p-0 small text-muted">{user && user?.mobile}</p>
+								}
 							</div>
-							<div className="bg-success d-flex align-items-center justify-content-center" style={{ color: "white", width:"40px", height:"100%" }}>
-                              <i className="fa fa-angle-down fs-2" style={{ color: "white"}}/>
+							<div className="bg-success d-flex align-items-center justify-content-center" style={{ color: "white", width: "40px", height: "100%" }}>
+								<i className="fa fa-angle-down fs-2" style={{ color: "white" }} />
 							</div>
 						</div>
 					</div>
@@ -85,7 +88,7 @@ const Header = ({ toggleSidebar }) => {
 
 					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
 						<li>
-							<Link to="/admin-panel/user-profile" className="dropdown-item">
+							<Link to="/scp/dashboard" className="dropdown-item">
 								Profile
 							</Link>
 						</li>

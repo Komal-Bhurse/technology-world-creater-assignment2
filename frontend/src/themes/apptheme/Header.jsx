@@ -14,7 +14,7 @@ const Header = ({ toggleSidebar }) => {
 	const Logout = async () => {
 		const loading = toast.loading("Logging Out!");
 		try {
-			const response = await axios.post("/apis/auth/logout", { withCredentials: true });
+			const response = await axios.post("/apis/auth/logout",{}, { withCredentials: true });
              const res = response?.data
 			if (res.status === "success") {
 				persistor.purge();

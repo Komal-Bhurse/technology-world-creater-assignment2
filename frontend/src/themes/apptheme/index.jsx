@@ -36,7 +36,7 @@ export default function index() {
 				<Header toggleSidebar={toggleSidebar} />
 				<div className="main-layout d-flex">
 					{
-						user && user?.UserType === "SCP" ? (
+						user && user?.userType === "SCP" ? (
 							<SCPSidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
 						)
 						:(

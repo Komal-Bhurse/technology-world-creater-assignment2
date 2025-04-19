@@ -20,15 +20,15 @@ export default function index() {
 	};
 
 	useEffect(() => {
-		if (pathname === "/" && user && user?.UserType === "SCP") {
+		if (pathname === "/" && user && user?.userType === "SCP") {
 			window.location.href = "/scp/dashboard";
 		}
 
-		if (pathname === "/scp/dashboard" && !user && user?.UserType !== "SCP") {
+		if (pathname === "/scp/dashboard" && !user && user?.userType !== "SCP") {
 			window.location.href = "/";
 		}
 
-	}, [user]);
+	}, [pathname,user?.userType]);
 
 	return (
 		<>

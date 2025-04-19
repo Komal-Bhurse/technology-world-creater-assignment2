@@ -67,7 +67,7 @@ const Header = ({ toggleSidebar }) => {
 
 						<span className="fw-bold text-secondary">Announcements</span>
 					</div>
-					<div onClick={() => navigate("/scp/login")} className="border border-2  row dropdown-toggle" style={{ borderRadius: "10px" }} id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" >
+					<div onClick={() => !user && user?.userType !== "SCP" && navigate("/scp/login")} className="border border-2  row dropdown-toggle" style={{ borderRadius: "10px" }} id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" >
 						<div className="col-3">
 							<img style={{ width: "60px", height: "60px" }} src="/images/profile-avtar.png" alt="Avatar" className="rounded-circle " />
 						</div>

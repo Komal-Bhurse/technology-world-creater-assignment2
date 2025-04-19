@@ -196,7 +196,7 @@ const Register = async (req, res) => {
     res.cookie("twc_uid2", token, {
         secure: true,
         httpOnly:true,
-        domain: "technology-world-creater-assignment2.vercel.app",
+        domain: "twc-tb33.onrender.com",
     });
 
     return res.status(201).json({
@@ -272,7 +272,7 @@ const Login = async (req, res) => {
     res.cookie("twc_uid2", token, {
       secure: true,
       httpOnly: true,
-      domain: "technology-world-creater-assignment2.vercel.app",
+      domain: "twc-tb33.onrender.com",
     });
 
     res

@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://technology-world-creater-assignment2.vercel.app/",
+        target: "https://twc-tb33.onrender.com/",
         secure: true,
         changeOrigin: true,
       },

@@ -21,13 +21,18 @@ export const FilterRequiredData = (step, data) => {
           filteredData = Object.fromEntries(
             Object.entries(data).filter(([key]) => step1fields.includes(key))
           );
-    
-          hasEmptyField = step1Requiredfields.some(
-            (key) =>
-            filteredData[key] === "" ||
-            filteredData[key] === null ||
-            filteredData[key] === undefined
+
+          const emptyFields = step1Requiredfields.filter(field => 
+            field in data && data[field].trim() === ""
           );
+          
+          if (emptyFields.length > 0) {
+            hasEmptyField = true
+          } else {
+            hasEmptyField = false
+          }
+    
+          
     }
 
     if(step === "step2"){
@@ -35,12 +40,15 @@ export const FilterRequiredData = (step, data) => {
         Object.entries(data).filter(([key]) => step2fields.includes(key))
       );
 
-      hasEmptyField = step2Requiredfields.some(
-        (key) =>
-          filteredData[key] === "" ||
-          filteredData[key] === null ||
-          filteredData[key] === undefined
+      const emptyFields = step2Requiredfields.filter(field => 
+        field in data && data[field].trim() === ""
       );
+      
+      if (emptyFields.length > 0) {
+        hasEmptyField = true
+      } else {
+        hasEmptyField = false
+      }
     }
     
     if(step === "step3"){
@@ -48,12 +56,15 @@ export const FilterRequiredData = (step, data) => {
         Object.entries(data).filter(([key]) => step3fields.includes(key))
       );
 
-      hasEmptyField = step3Requiredfields.some(
-        (key) =>
-          filteredData[key] === "" ||
-          filteredData[key] === null ||
-          filteredData[key] === undefined
+      const emptyFields = step3Requiredfields.filter(field => 
+        field in data && data[field].trim() === ""
       );
+      
+      if (emptyFields.length > 0) {
+        hasEmptyField = true
+      } else {
+        hasEmptyField = false
+      }
     }
     
     if(step === "step4"){
@@ -61,12 +72,15 @@ export const FilterRequiredData = (step, data) => {
         Object.entries(data).filter(([key]) => step4fields.includes(key))
       );
 
-      hasEmptyField = step4Requiredfields.some(
-        (key) =>
-          filteredData[key] === "" ||
-          filteredData[key] === null ||
-          filteredData[key] === undefined
+      const emptyFields = step4Requiredfields.filter(field => 
+        field in data && data[field].trim() === ""
       );
+      
+      if (emptyFields.length > 0) {
+        hasEmptyField = true
+      } else {
+        hasEmptyField = false
+      }
     }
     
     return { filteredData, hasEmptyField };

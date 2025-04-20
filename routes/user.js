@@ -29,9 +29,9 @@ router.get('/getall', verifyToken ,authorizedRole("SCP"),getAllUsers)
 
 router.get('/:id',verifyToken,authorizedRole("SCP"),getOneUser)
 
-router.post('/',uploadFarmerPhoto.fields([{name:"farmerPhoto"}]),verifyToken,authorizedRole("SCP"),addOneUser)
+router.post('/',uploadFarmerPhoto.fields([{name:"farmerPhoto"}]),addOneUser)
 
-router.put('/:id',uploadFarmerPhoto.fields([{name:"farmerPhoto"}]),verifyToken,authorizedRole("SCP"),updateOneUser)
+router.put('/:id',uploadFarmerPhoto.fields([{name:"farmerPhoto"}]),updateOneUser)
 
 router.delete('/:id',verifyToken,authorizedRole("SCP"),deleteOneUser)
 

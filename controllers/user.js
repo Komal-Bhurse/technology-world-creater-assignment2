@@ -1,5 +1,6 @@
 import Farmer from "../models/farmer.js";
-
+import fs from "fs";
+import path from "path";
 import { FilterRequiredData } from "../services/datafilterartion.js";
 
 const getAllUsers = async (req, res) => {
@@ -141,7 +142,7 @@ const addOneUser = async (req, res) => {
           }
         });
 
-    res.status(500).json({ status: "failed", message: "Unable to add farmer", data: "" });
+    res.status(500).json({ status: "failed", message: error?.message, data: "" });
   }
 };
 

@@ -57,6 +57,7 @@ const addOneUser = async (req, res) => {
       mobile,
       dob,
       gender,
+      newBussiness
     } = data;
 
     if (

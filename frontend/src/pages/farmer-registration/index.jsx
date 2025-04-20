@@ -85,7 +85,7 @@ function index() {
 
     const [initialData, setInitialData] = useState(initialRegisterValues);
 
-    const [tab, setTab] = useState("step3");
+    const [tab, setTab] = useState(1);
 
     const [loading, setLoading] = useState(false);
 
@@ -175,7 +175,7 @@ function index() {
 
                 if (farmerID) {
 
-                    formData.append("step", tab)
+                    formData.append("step", "step1")
                     const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")
                     const res = response?.data;
 
@@ -233,7 +233,7 @@ function index() {
                 for (const key in updatedFields) {
                     formData.append(key, updatedFields[key])
                 }
-                formData.append("step", tab)
+                formData.append("step", "step2")
                 const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")
                 const res = response?.data;
 
@@ -274,7 +274,7 @@ function index() {
                 for (const key in updatedFields) {
                     formData.append(key, updatedFields[key])
                 }
-                formData.append("step", tab)
+                formData.append("step", "step3")
                 const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")
                 const res = response?.data;
 
@@ -306,7 +306,7 @@ function index() {
                 for (const key in updatedFields) {
                     formData.append(key, updatedFields[key])
                 }
-                formData.append("step", tab)
+                formData.append("step", "step4")
                 const response = await APICALL("put", `/api/user/${farmerID}`, formData, "formdata")
                 const res = response?.data;
 
@@ -350,10 +350,10 @@ function index() {
                 <div className="m-auto">
                     <div className="card-body p-2 shadow">
                         <nav className="nav nav-pills nav-fill">
-                            <span onClick={() => setTab("step1")} className={`nav-link ${tab === "step1" ? "active bg-success text-white" : "text-dark"}`} >Profile Details</span>
-                            <span onClick={() => setTab("step2")} className={`nav-link ${tab === "step2" ? "active bg-success text-white" : "text-dark"}`} >Address Details</span>
-                            <span onClick={() => setTab("step3")} className={`nav-link ${tab === "step3" ? "active bg-success text-white" : "text-dark"}`} >Farmer Details</span>
-                            <span onClick={() => setTab("step4")} className={`nav-link ${tab === "step4" ? "active bg-success text-white" : "text-dark"}`} >Land Verification</span>
+                            <span onClick={() => setTab(1)} className={`nav-link ${tab === 1 ? "active bg-success text-white" : "text-dark"}`} >Profile Details</span>
+                            <span onClick={() => setTab(2)} className={`nav-link ${tab === 2 ? "active bg-success text-white" : "text-dark"}`} >Address Details</span>
+                            <span onClick={() => setTab(3)} className={`nav-link ${tab === 3 ? "active bg-success text-white" : "text-dark"}`} >Farmer Details</span>
+                            <span onClick={() => setTab(4)} className={`nav-link ${tab === 4 ? "active bg-success text-white" : "text-dark"}`} >Land Verification</span>
                         </nav>
                     </div>
                 </div>
@@ -365,7 +365,7 @@ function index() {
                             <div>
 
                                 {
-                                    tab === "step1" &&
+                                    tab === 1 &&
                                     <div className="row">
                                         <div className="mb-3 col-lg-6">
                                             <label htmlFor="firstName" className="form-label">
@@ -604,7 +604,7 @@ function index() {
                                 }
 
                                 {
-                                    tab === "step2" &&
+                                    tab === 2 &&
 
                                     <div className="row">
                                         <div className="mb-3 col-lg-6">
@@ -785,7 +785,7 @@ function index() {
                                     </div>
                                 }
                                 {
-                                    tab === "step3" && (
+                                    tab === 3 && (
 
                                         <div className="row justify-content-center">
                                             <div className="mb-3 col-lg-12 row">
@@ -942,7 +942,7 @@ function index() {
                                     )
                                 }
                                 {
-                                    tab === "step4" &&
+                                    tab === 4 &&
 
                                     <div className="row">
                                         <div className="mb-3 col-lg-6">
